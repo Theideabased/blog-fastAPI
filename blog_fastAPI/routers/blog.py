@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from  import schemas, database, models
+from blog-fastapiimport schemas, database, models
 from sqlalchemy.orm import Session
 from typing import List
 
