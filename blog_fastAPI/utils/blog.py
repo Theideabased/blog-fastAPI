@@ -2,13 +2,13 @@ from fastapi import Depends, HTTPException, status
 from blog_fastAPI import database
 from sqlalchemy.orm import Session
 from blog_fastAPI import models, schemas
-
+from blog_fastAPI.oauth2 import get_current_user
 def get_all(db: Session):
     blogs = db.query(models.Blog).all()
     return blogs
 
 def create(request: schemas.Blog ,db:Session):
-    new_blog = models.Blog(title=request.title, body=request.body, user_id=1)
+    new_blog = models.Blog(title=request.title, body=request.body, user_id=get_current_user())
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
